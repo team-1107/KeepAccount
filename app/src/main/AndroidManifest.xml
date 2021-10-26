@@ -15,7 +15,8 @@
             android:theme="@style/Theme.AppCompat.Light.Dialog"/>
         <activity
             android:name=".MedalActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:label="@string/MyMedal"/>
         <activity
             android:name=".ChartActivity"
             android:exported="true"

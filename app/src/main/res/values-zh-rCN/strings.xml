@@ -37,4 +37,5 @@
     <string name="no_tag_tip">请选择标签</string>
     <string name="MyGraph">我的图表</string>
     <string name="selectDate">选择时间</string>
+    <string name="MyMedal">我的勋章</string>
 </resources>
