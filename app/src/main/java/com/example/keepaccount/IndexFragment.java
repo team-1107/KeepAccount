@@ -125,8 +125,6 @@ public class IndexFragment extends Fragment implements AdapterView.OnItemLongCli
 
         //没有数据时显示
         todayList.setEmptyView(noDataText);
-//        //设置点击修改
-//        todayList.setOnItemClickListener(this);
         //设置长按删除
         todayList.setOnItemLongClickListener(this);
     }
@@ -151,37 +149,6 @@ public class IndexFragment extends Fragment implements AdapterView.OnItemLongCli
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-
-//    //点击修改
-//    @Override
-//    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-//        Object itemStPosition = todayList.getItemAtPosition(position);
-//
-//        Item item = (Item) itemStPosition;
-//        int alterId = item.getId();
-//        String alterDate = item.getDate();
-//        String alterTime = item.getTime();
-//        String alterTitle = item.getTitle();
-//        String alterDetail = item.getDetail();
-//        String alterTag = item.getTag();
-//
-//        Log.i(TAG, "onItemClick: alterDate:"+alterDate);
-//        Log.i(TAG, "onItemClick: alterTime:"+alterTime);
-//        Log.i(TAG, "onItemClick: alterTitle:"+alterTitle);
-//        Log.i(TAG, "onItemClick: alterDetail:"+alterDetail);
-//        Log.i(TAG, "onItemClick: alterTag:"+alterTag);
-//
-//        //打开新窗口
-//        Intent alterIntent = new Intent(getActivity(), AlterRecordActivity.class);
-//        alterIntent.putExtra("alterId", alterId);
-//        alterIntent.putExtra("alterDate", alterDate);
-//        alterIntent.putExtra("alterTime", alterTime);
-//        alterIntent.putExtra("alterTitle", alterTitle);
-//        alterIntent.putExtra("alterDetail", alterDetail);
-//        alterIntent.putExtra("alterTag", alterTag);
-//        startActivity(alterIntent);
-//
-//    }
 
     //长按删除
     @Override

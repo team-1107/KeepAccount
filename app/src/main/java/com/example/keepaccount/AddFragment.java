@@ -184,6 +184,7 @@ public class AddFragment extends Fragment implements AdapterView.OnItemClickList
 
                     DBManager dbManager = new DBManager(getActivity().getApplicationContext());
                     dbManager.add(item);
+                    Log.i("db","新增记录");
 
                     //判断连续打卡
                     SharedPreferences sp = getContext().getSharedPreferences("KeepAccount", Activity.MODE_PRIVATE);
@@ -193,7 +194,7 @@ public class AddFragment extends Fragment implements AdapterView.OnItemClickList
                     Date date = new Date(System.currentTimeMillis());
                     String todayStr = simpleDateFormat.format(date);
                     String lastBilling = sp.getString("lastBilling",todayStr);
-                    Log.i(TAG, "onClick: sp中上次记账日期");
+                    Log.i(TAG, "onClick: sp中上次记账日期:"+lastBilling);
 
                     SharedPreferences.Editor editor= sp.edit();
                     try {
@@ -201,12 +202,16 @@ public class AddFragment extends Fragment implements AdapterView.OnItemClickList
                         Calendar calendar = new GregorianCalendar();
                         calendar.setTime(lastBilling_recorded);
                         calendar.add(calendar.DATE,1); //把日期往后增加一天,整数往后推,负数往前移动
-                        String yesterday=simpleDateFormat.format(calendar.getTime()); //获取昨天日期
-                        if(!(yesterday.equals(todayStr))){
+                        String yesterday = simpleDateFormat.format(calendar.getTime()); //获取昨天日期
+                        if(lastBilling.equals(todayStr)){
+                            Log.i(TAG, "onClick: 今天已经记过账");
+
+                        }else if(!(yesterday.equals(todayStr))){
                             Log.i(TAG, "onClick: 昨天没记账");
                             editor.putInt("continuousDays",1);
                             editor.putString("lastBilling",todayStr);
                             editor.apply();
+
                         }else{
                             Log.i(TAG, "onClick: 昨天记账了");
                             int continuousCount = sp.getInt("continuousDays",0);
@@ -220,7 +225,6 @@ public class AddFragment extends Fragment implements AdapterView.OnItemClickList
                         e.printStackTrace();
                     }
 
-                    Log.i("db","新增记录");
 
                     Intent intent = new Intent(getActivity(),MainActivity.class);
                     startActivity(intent);
