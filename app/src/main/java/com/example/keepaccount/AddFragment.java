@@ -203,9 +203,17 @@ public class AddFragment extends Fragment implements AdapterView.OnItemClickList
                         calendar.setTime(lastBilling_recorded);
                         calendar.add(calendar.DATE,1); //把日期往后增加一天,整数往后推,负数往前移动
                         String yesterday = simpleDateFormat.format(calendar.getTime()); //获取昨天日期
-                        if(lastBilling.equals(todayStr)){
-                            Log.i(TAG, "onClick: 今天已经记过账");
 
+                        int continuousCount = sp.getInt("continuousDays",0); //连续记账天数
+                        if(lastBilling.equals(todayStr)){
+                            if(continuousCount == 0){
+                                Log.i(TAG, "onClick: 日期为今天，连续次数为0，首次记账");
+                                editor.putInt("continuousDays",1);
+                                editor.putString("lastBilling",todayStr);
+                                editor.apply();
+                            }else{
+                                Log.i(TAG, "onClick: 今天已经记过账");
+                            }
                         }else if(!(yesterday.equals(todayStr))){
                             Log.i(TAG, "onClick: 昨天没记账");
                             editor.putInt("continuousDays",1);
@@ -214,7 +222,6 @@ public class AddFragment extends Fragment implements AdapterView.OnItemClickList
 
                         }else{
                             Log.i(TAG, "onClick: 昨天记账了");
-                            int continuousCount = sp.getInt("continuousDays",0);
                             editor.putInt("continuousDays",++continuousCount);
                             editor.putString("lastBilling",todayStr);
                             editor.apply();

@@ -72,7 +72,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");// HH:mm:ss
         Date date = new Date(System.currentTimeMillis());
         String selectDateStr = simpleDateFormat.format(date);
-        String lastBilling = sp.getString("lastBilling",selectDateStr);
+        String lastBilling = sp.getString("lastBilling", selectDateStr);
         tvLastBilling.setText(lastBilling);
 
 
